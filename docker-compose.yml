@@ -1,0 +1,19 @@
+version: '3.1'
+
+services:
+  mariadb2:
+    image: mariadb
+    container_name: book_sql
+    restart: always
+    environment:
+      [MYSQL_ROOT_PASSWORD=root,MYSQL_USER=book_user,MYSQL_PASSWORD=book_passwd,MYSQL_DATABASE=bookmedik]
+    volumes:
+      - ./mysql:/var/lib/mysql
+  bookmedik:
+    image: juanan219/book_debian
+    container_name: book_debian
+    restart: always
+    ports:
+      - 80:80
+    volumes:
+      - ./logs:/var/log/apache2
